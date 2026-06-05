@@ -1,0 +1,21 @@
+name: Morning Discord Plan
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 08:00 Asia/Seoul = 23:00 UTC on the previous day.
+    - cron: "0 23 * * *"
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Send Discord planning message
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_USERNAME: Plan Assistant
+        run: python3 scripts/send_morning_discord.py

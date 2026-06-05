@@ -1,0 +1,9 @@
+# Example crontab for sending a Discord planning message every morning.
+# This assumes the machine's local timezone is Asia/Seoul.
+#
+# Install manually with:
+#   crontab -e
+#
+# Replace /path/to/discord-plan-assistant and /usr/bin/python3.
+
+0 8 * * * cd /path/to/discord-plan-assistant && /usr/bin/python3 scripts/send_morning_discord.py >> logs/cron.log 2>&1
